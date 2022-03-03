@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>试题搜索</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" type="text/css" th:href="@{common/layui/css/layui.css}" href="common/layui/css/layui.css"
+          media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{common/bootstrap/css/bootstrap.css}"
+          href="common/bootstrap/css/bootstrap.css" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{common/global.css}" href="common/global.css" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{css/personal.css}" href="css/personal.css" media="all">
+</head>
+<body>
+<section class="layui-larry-box">
+    <div class="larry-personal">
+        <div class="layui-tab">
+            <blockquote class="layui-elem-quote news_search">
+                <div class="layui-inline">
+                    <form th:action="@{/lib/searchLib}">
+                        <div class="layui-input-inline">
+                            <input id="search" name="sealib" placeholder="请输入题目关键字" class="layui-input search_input" type="text">
+                        </div>
+                        <button type="submit"><a class="layui-btn" id="select">查询</a></button>
+                    </form>
+
+                </div>
+
+                <div class="layui-inline" style="float: right;">
+                    <div class="layui-form-mid layui-word-aux">本页面刷新后所有操作无效，关闭或刷新页面所有数据重置</div>
+                </div>
+            </blockquote>
+
+            <div class="layui-form news_list">
+                <table class="layui-table" th:each="error,iterStat:${session.seaLibs}">
+
+                    <thead>
+                        <tr>
+                            <th th:text="'题目编号' + ${error.getlId()}">题目编号</th>
+                            <th  th:text="${error.getQuestion()}" colspan="6"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>选项A</td>
+                            <td th:text="${error.getA()}" colspan="6"></td>
+                        </tr>
+                        <tr>
+                            <td>选项B</td>
+                            <td th:text="${error.getB()}" colspan="6"></td>
+                        </tr>
+                        <tr>
+                            <td>选项C</td>
+                            <td th:text="${error.getC()}" colspan="6"></td>
+                        </tr>
+                        <tr>
+                            <td>选项D</td>
+                            <td th:text="${error.getD()}" colspan="6"></td>
+                        </tr>
+                        <tr>
+                            <td>答案</td>
+                            <td th:text="${error.getAnswer()}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript" th:src="@{/easyui/jquery-1.8.0.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/easyui/themes/default/easyui.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/easyui/themes/icon.css}">
+<script type="text/javascript" th:src="@{/easyui/jquery.easyui.min.js}"></script>
+<script type="text/javascript" th:src="@{common/layui/layui.js}" src="../static/common/layui/layui.js"></script>
+<script type="text/javascript" th:src="@{js/newslist.js}" src="../static/js/newslist.js"></script>
+<script type="text/javascript">
+    //查询
+    $("#select").click(function(){
+        if($("#search").val() != ''){
+            // alert("正在查询，请稍后");
+            // layer.alert("查询中，请稍候");
+            var index = layer.msg('查询中，请稍候',{icon: 16,time:false,shade:0.8});
+            setTimeout(function(){
+                layer.close(index);
+            },2000);
+        }else{
+            layer.msg("请输入需要查询的内容");
+        }
+    })
+</script>
+</body>
+</html>

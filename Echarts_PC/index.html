@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数据可视化</title>
+    <link rel="stylesheet" href="css/index.css" />
+  </head>
+  <body>
+    <!-- 头部的盒子 -->
+    <header>
+      <h1>智慧校园疫情防控系统——数据可视化</h1>
+      <div class="showTime"></div>
+      <script>
+        var t = null;
+        t = setTimeout(time, 1000); //開始运行
+        function time() {
+          clearTimeout(t); //清除定时器
+          dt = new Date();
+          var y = dt.getFullYear();
+          var mt = dt.getMonth() + 1;
+          var day = dt.getDate();
+          var h = dt.getHours(); //获取时
+          var m = dt.getMinutes(); //获取分
+          var s = dt.getSeconds(); //获取秒
+          document.querySelector(".showTime").innerHTML =
+            "当前时间：" +
+            y +
+            "年" +
+            mt +
+            "月" +
+            day +
+            "-" +
+            h +
+            "时" +
+            m +
+            "分" +
+            s +
+            "秒";
+          t = setTimeout(time, 1000); //设定定时器，循环运行
+        }
+      </script>
+      &
+    </header>
+
+    <!-- 页面主体部分 -->
+    <section class="mainbox">
+      <div class="column">
+        <div class="panel bar">
+          <h2>柱形图-学院分布</h2>
+          <div class="chart"></div>
+          <div class="panel-footer"></div>
+        </div>
+        <div class="panel line">
+          <h2>
+            折线图-疫情变化 <a href="javacript:;">2020</a
+            ><a href="javascript:;">2021</a>
+          </h2>
+          <div class="chart">图表</div>
+          <div class="panel-footer"></div>
+        </div>
+        <div class="panel pie">
+          <h2>饼形图-学校年龄分布</h2>
+          <div class="chart">图表</div>
+          <div class="panel-footer"></div>
+        </div>
+      </div>
+      <div class="column">
+        <!-- no模块制作 -->
+        <div class="no">
+          <div class="no-hd">
+            <ul>
+              <li>125811</li>
+              <li>1300</li>
+            </ul>
+          </div>
+          <div class="no-bd">
+            <ul>
+              <li>学校在校学生数</li>
+              <li>学校在校职工数</li>
+            </ul>
+          </div>
+        </div>
+        <!-- 地图模块 -->
+        <div class="map">
+          <div class="map1"></div>
+          <div class="map2"></div>
+          <div class="map3"></div>
+  <body>
+          <div id="main" style="width: 110%; height: 600px; position: absolute; left: -110px;
+          -webkit-tap-highlight-color: transparent; user-select: none; background: rgb(21, 78, 144);"
+               _echarts_instance_="ec_1611994968070"><div style="position: relative; overflow: hidden;
+               width: 1068px; height: 600px; padding: 0px; margin: 0px; border-width: 0px;
+               cursor: default;"><canvas width="1693"  height="825" data-zr-dom-id="zr_0"
+                                         style="position: absolute; left: 0px; top: 0px;
+                                         width: 868px; height: 600px; user-select: none;
+                                         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+                                         padding: 0px; margin: 0px; border-width: 0px;">
+
+          </canvas></div></div>
+
+          <script type="text/javascript" src="./lib/jquery-3.1.1.min.js"></script>
+          <script type="text/javascript" src="./lib/echarts.min.js" ></script>
+          <script type="text/javascript" src="./map/jiangxi.js"></script>
+          <script type="text/javascript" src="./extendsMap.js"></script>
+          <script>
+            var myChart = echarts.extendsMap('main', {
+              bgColor: '#154e90',
+              mapName: '江西',
+              goDown: true,
+              callback: function(name, option, instance){
+                // console.log(name, option, instance);
+              },
+              data: [{
+                name: '南昌',
+                value: 10,
+                level: 1
+              }, {
+                name: '景德镇',
+                value: 12,
+                level: 2
+              }, {
+                name: '萍乡',
+                value: 11,
+                level: 3
+              }, {
+                name: '赣州',
+                value: 16,
+                level: 2
+              }, {
+                name: '吉安',
+                value: 12,
+                level: 1
+              }]
+            });
+            // 初始化实例对象后可设置实例对象要显示的地图
+                       // myChart.setMap('吉安市');
+
+          </script>
+          </body>
+        </div>
+      </div>
+      <div class="column">
+        <div class="panel bar2">
+          <h2>柱形图-附近省份分布</h2>
+          <div class="chart">图表</div>
+          <div class="panel-footer"></div>
+        </div>
+        <div class="panel line2">
+          <h2>折线图-进出省人数</h2>
+          <div class="chart">图表</div>
+          <div class="panel-footer"></div>
+        </div>
+        <div class="panel pie2">
+          <h2>饼形图-江西地区分布</h2>
+          <div class="chart">图表</div>
+          <div class="panel-footer"></div>
+        </div>
+      </div>
+    </section>
+    <script src="js/flexible.js"></script>
+    <script src="js/echarts.min.js"></script>
+    <!-- 先引入jquery -->
+    <script src="js/jquery.js"></script>
+    <!-- 必须先引入china.js 这个文件 因为中国地图需要 -->
+    <script src="js/china.js"></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>

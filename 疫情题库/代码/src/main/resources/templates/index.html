@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>在线刷题系统</title>
+	<meta name="renderer" content="webkit">	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">	
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">	
+	<meta name="apple-mobile-web-app-capable" content="yes">	
+	<meta name="format-detection" content="telephone=no">	
+	<!-- load css -->
+	<link rel="stylesheet" type="text/css" th:href="@{common/layui/css/layui.css}" href="common/layui/css/layui.css" media="all">
+	<link rel="stylesheet" type="text/css" th:href="@{common/global.css}" href="common/global.css" media="all">
+	<link rel="stylesheet" type="text/css" th:href="@{css/adminstyle.css}" href="css/adminstyle.css" media="all">
+
+</head>
+<body>
+<div class="layui-layout layui-layout-admin" id="layui_layout">
+	<!-- 顶部区域 -->
+	<div class="layui-header header header-demo">
+		<div class="layui-main">
+		    <!-- logo区域 -->
+			<div class="admin-logo-box">
+				<a class="logo"  href="#" title="logo">在线刷题系统</a>
+				<div class="larry-side-menu">
+					<i class="fa fa-bars" aria-hidden="true"></i>
+				</div>
+			</div>
+            <ul class="layui-nav larry-header-item">
+					<li class="layui-nav-item" th:text="'登陆时间：' + ${#dates.format(session.loginUser.lastlogintime,'yyyy-MM-dd hh:mm:ss')}">
+					欢迎您，登陆！
+					</li>
+            		<li class="layui-nav-item first">
+						<a href="javascript:;">
+							<cite th:text="${session.loginUser.username}"></cite>
+							<span class="layui-nav-more"></span>
+						</a>
+						<dl class="layui-nav-child">
+							<dd>
+								<a id="btn1">修改信息</a>
+							</dd>
+							<dd>
+								<a id="btn2">修改密码</a>
+							</dd>
+							<dd>
+								<a th:href="@{/login}">切换账户</a>
+							</dd>
+							
+						</dl>
+					</li>
+					<li class="layui-nav-item">
+						<a href="javascript:;" id="lock"/>
+                        <i class="iconfont icon-diannao1"></i>
+						锁屏</a>
+					</li>
+					<li class="layui-nav-item">
+						<a th:href="@{/user/clearSession}" href="login.html">
+                        <i class="iconfont icon-exit"></i>
+						退出</a>
+					</li>
+            </ul>
+		</div>
+	</div>
+	<!-- 左侧侧边导航开始 -->
+	<div class="layui-side layui-side-bg layui-larry-side" id="larry-side">
+        <div class="layui-side-scroll" id="larry-nav-side" lay-filter="side">
+		
+		<!-- 左侧菜单 -->
+		<ul class="layui-nav layui-nav-tree">
+			<li class="layui-nav-item layui-this">
+				<a href="javascript:;"  data-url="main.html">
+				    <i class="iconfont icon-home1" data-icon='icon-home1'></i>
+					<span>后台首页</span>
+				</a>
+			</li>
+			<!-- 个人信息 -->
+			<li class="layui-nav-item">
+				<a href="javascript:;">
+					<i class="iconfont icon-jiaoseguanli" ></i>
+					<span>我的面板</span>
+					<em class="layui-nav-more"></em>
+				</a>
+				<dl class="layui-nav-child">
+                    <dd>
+                        <a id="btn1-1" href="javascript:;" data-url="personInfo.html">
+                            <i class="iconfont icon-geren1" data-icon='icon-geren1'></i>
+                            <span>个人信息</span>
+                        </a>
+                    </dd>
+
+					<dd>
+						<a id="btn2-2" href="javascript:;" data-url="changepwd.html">
+							<i class="iconfont icon-iconfuzhi01" data-icon='icon-iconfuzhi01'></i>
+							<span>修改密码</span>
+						</a>
+					</dd>
+                </dl>
+			</li>
+
+
+			<!-- 会员管理 -->
+			<li class="layui-nav-item">
+				<a href="javascript:;">
+					<i class="iconfont icon-m-members" ></i>
+					<span>刷题系统</span>
+					<em class="layui-nav-more"></em>
+				</a>
+				<dl class="layui-nav-child">
+					<dd>
+						<a href="javascript:;" data-url="/lib/orderLib">
+							<i class="iconfont icon-zhuti"  data-icon='icon-zhuti'></i>
+							<span>顺序刷题</span>
+						</a>
+					</dd>
+					<dd>
+						<a href="javascript:;" data-url="/lib/randLib">
+							<i class="iconfont icon-zhuti"  data-icon='icon-zhuti'></i>
+							<span>乱序刷题</span>
+						</a>
+					</dd>
+					<dd>
+						<a href="javascript:;" data-url="/error/randErrorLib">
+							<i class="iconfont icon-zhuti"  data-icon='icon-zhuti'></i>
+							<span>错题重刷</span>
+						</a>
+					</dd>
+				</dl>
+			</li>
+
+			<!-- 内容管理 -->
+			<li class="layui-nav-item">
+					<a href="javascript:;">
+					   <i class="iconfont icon-wenzhang1" ></i>
+					   <span>试题管理</span>
+					   <em class="layui-nav-more"></em>
+					</a>
+					   <dl class="layui-nav-child">
+					    	<dd>
+					    		<a href="javascript:;" data-url="/error/errorsPage?currentPage=1&flag=1">
+					    		   <i class="iconfont icon-wenzhang2" data-icon='icon-wenzhang2'></i>
+					    		   <span>错题空间</span>
+					    		</a>
+					    	</dd>
+
+<!--					    	<dd>
+					    		<a href="javascript:;">
+					    		   <i class="iconfont icon-pinglun1" data-icon='icon-pinglun1'></i>
+					    		   <span>备注管理</span>
+					    		</a>
+					    	</dd>-->
+					    	
+					    	<dd>
+					    		<a href="javascript:;" data-url="/searchlib">
+					    		   <i class="iconfont icon-tags1" data-icon='icon-tags1'></i>
+					    		   <span>试题搜索</span>
+					    		</a>
+					    	</dd>
+						   <dd>
+						   		<a href="javascript:;" data-url="/errorexport">
+						   		<i class="iconfont icon-word" data-icon='icon-word'></i>
+						  		 <span>错题导出</span>
+						   </a>
+						   </dd>
+					    	<dd>
+					    		<a href="javascript:;" data-url="/error/errorsPage?currentPage=1&flag=0">
+					    		   <i class="iconfont icon-huishouzhan1" data-icon='icon-huishouzhan1'></i>
+					    		   <span>错题回收站</span>
+					    		</a>
+					    	</dd>
+					   </dl>
+			   </li>
+
+				<li class="layui-nav-item">
+					<a  th:href="@{/druid/login}">
+					   <i class="iconfont icon-youqinglianjie"  data-icon='icon-youqinglianjie'></i>
+					   <span>网站监控</span>
+					</a>
+				</li>
+		</ul>
+	    </div>
+	</div>
+
+	<!-- 左侧侧边导航结束 -->
+	<!-- 右侧主体内容 -->
+	<div class="layui-body" id="larry-body" style="bottom: 0;border-left: solid 2px #2299ee;">
+		<div class="layui-tab layui-tab-card larry-tab-box" id="larry-tab" lay-filter="demo" lay-allowclose="true">
+			<div class="go-left key-press pressKey" id="titleLeft" title="滚动至最右侧"><i class="larry-icon larry-weibiaoti6-copy"></i> </div>
+			<ul class="layui-tab-title">
+				<li class="layui-this" id="admin-home"><i class="iconfont icon-diannao1"></i><em>后台首页</em></li>
+			</ul>
+			<div class="go-right key-press pressKey" id="titleRight" title="滚动至最左侧"><i class="larry-icon larry-right"></i></div> 
+			<ul class="layui-nav closeBox">
+				  <li class="layui-nav-item">
+				    <a href="javascript:;"><i class="iconfont icon-caozuo"></i> 页面操作</a>
+				    <dl class="layui-nav-child">
+					  <dd><a id="refresh_iframe" href="javascript:;" class="refresh refreshThis"><i class="layui-icon">&#x1002;</i> 刷新当前</a></dd>
+				      <dd><a href="javascript:;" class="closePageOther"><i class="iconfont icon-prohibit"></i> 关闭其他</a></dd>
+				      <dd><a href="javascript:;" class="closePageAll"><i class="iconfont icon-guanbi"></i> 关闭全部</a></dd>
+				    </dl>
+				  </li>
+				</ul>
+			<div class="layui-tab-content" style="min-height: 150px; ">
+				<div class="layui-tab-item layui-show">
+					<iframe class="larry-iframe" data-id='0' th:src="@{/main.html}" src="main.html"></iframe>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 底部区域 -->
+	<div class="layui-footer layui-larry-foot" id="larry-footer">
+		<div class="layui-mian">  
+		    <p class="p-admin">
+
+				<p>© 2019 薛国鹏 版权所有 联系方式(qq)：2043928998</p>
+		    </p>
+		</div>
+	</div>
+</div>
+
+
+<!-- 加载js文件-->
+<script type="text/javascript" th:src="@{easyui/jquery-1.8.0.min.js}" src="easyui/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" th:src="@{common/layui/layui.js}" src="common/layui/layui.js"></script>
+<script type="text/javascript" th:src="@{js/larry.js}" src="js/larry.js"></script>
+<script type="text/javascript" th:src="@{js/index.js}" src="js/index.js"></script>
+
+<script>
+	$(function () {
+		$("#btn1").click(function() {
+                $("#btn1-1").click();
+            }
+        );
+        $("#btn2").click(function() {
+                $("#btn2-2").click();
+            }
+        );
+    });
+
+
+    var butAll = document.querySelector('.closePageAll')
+    var butOther = document.querySelector('.closePageOther')
+    var butUl = document.querySelector('.layui-tab-title')
+    var a = document.querySelector('.layui-tab-item')
+    butAll.addEventListener('click', function() {
+        var butLiAll = butUl.querySelectorAll('li')
+        var liLength = butLiAll.length
+        if(liLength > 1) {
+            for(var i = 1; i < liLength; i++) {
+                var butLi = butLiAll[i]
+                butUl.removeChild(butLi)
+            }
+        }
+        a.classList.value = a.classList.value + ' layui-show'
+    })
+
+    butOther.addEventListener('click', function() {
+        var butLiAll = butUl.querySelectorAll('li')
+        var liLength = butLiAll.length
+        if(liLength > 1) {
+            for(var i = 1; i < liLength; i++) {
+                var butLi = butLiAll[i]
+                var butLiAt = butLi.className
+                if(butLiAt) {
+                    console.log('butliat', butLiAt)
+                } else {
+                    butUl.removeChild(butLi)
+                }
+            }
+        }
+    })
+
+</script>
+
+<!-- 锁屏 -->
+<div class="lock-screen" style="display: none;">
+	<div id="locker" class="lock-wrapper">
+		<div id="time"></div>
+		<div class="lock-box center">
+			<img th:src="@{images/userimg.jpg}" src="images/userimg.jpg" alt="">
+			<h1 th:text="${session.loginUser.username}"></h1>
+			<duv class="form-group col-lg-12">
+				<input type="password" placeholder='改功能尚未与后台绑定' id="lock_password" class="form-control lock-input" autofocus name="lock_password">
+				<button id="unlock" class="btn btn-lock">点此解锁</button>
+			</duv>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

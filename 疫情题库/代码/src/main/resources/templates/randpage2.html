@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>错题练习</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" type="text/css" th:href="@{common/layui/css/layui.css}" href="common/layui/css/layui.css"
+          media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{common/bootstrap/css/bootstrap.css}"
+          href="common/bootstrap/css/bootstrap.css" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{common/global.css}" href="common/global.css" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{css/personal.css}" href="css/personal.css" media="all">
+</head>
+<body>
+<section class="layui-larry-box">
+    <div class="larry-personal">
+        <div class="layui-tab">
+            <blockquote class="layui-elem-quote news_search">
+
+                <div class="layui-inline">
+                    <div class="layui-form-mid layui-word-aux">欢迎使用本套系统，当前是错题重做，共10题</div>
+                </div>
+
+                <div class="layui-inline" style="float: right;">
+                    <div class="layui-form-mid layui-word-aux">本页面刷新后所有操作无效，关闭或刷新页面所有数据重置</div>
+                </div>
+            </blockquote>
+
+            <!-- 操作日志 -->
+            <form id="submitform" class="layui-form col-lg-12" th:action="@{/lib/trueORfalse}" method="post" name="list">
+            <div class="layui-form news_list" th:object="${session.randPage}">
+                <table class="layui-table">
+                    <thead>
+                        <tr>
+                            <th>题目1</th>
+                            <th  th:text="*{get(0).getQuestion()}"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>选项A</td>
+                            <td><input type="radio" name="0" value="A" th:title="*{get(0).getA()}" title="主机健盘与显示器"></td>
+                        </tr>
+                        <tr>
+                            <td>选项B</td>
+                            <td><input type="radio" name="0" value="B" th:title="*{get(0).getB()}" title="主机健盘与显示器"></td>
+                        </tr>
+                        <tr>
+                            <td>选项C</td>
+                            <td><input type="radio" name="0" value="C" th:title="*{get(0).getC()}" title="主机健盘与显示器"></td>
+                        </tr>
+                        <tr>
+                            <td>选项D</td>
+                            <td><input type="radio" name="0" value="D" th:title="*{get(0).getD()}" title="主机健盘与显示器"></td>
+                        </tr>
+                    </tbody>
+                    <thead>
+                    <tr>
+                        <th>题目2</th>
+                        <th  th:text="*{get(1).getQuestion()}"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>选项A</td>
+                        <td><input type="radio" name="1" value="A" th:title="*{get(1).getA()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    <tr>
+                        <td>选项B</td>
+                        <td><input type="radio" name="1" value="B" th:title="*{get(1).getB()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    <tr>
+                        <td>选项C</td>
+                        <td><input type="radio" name="1" value="C" th:title="*{get(1).getC()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    <tr>
+                        <td>选项D</td>
+                        <td><input type="radio" name="1" value="D" th:title="*{get(1).getD()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    </tbody>
+                    <thead>
+                    <tr>
+                        <th>题目3</th>
+                        <th th:text="*{get(2).getQuestion()}"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>选项A</td>
+                        <td><input type="radio" name="2" value="A" th:title="*{get(2).getA()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    <tr>
+                        <td>选项B</td>
+                        <td><input type="radio" name="2" value="B" th:title="*{get(2).getB()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    <tr>
+                        <td>选项C</td>
+                        <td><input type="radio" name="2" value="C" th:title="*{get(2).getC()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    <tr>
+                        <td>选项D</td>
+                        <td><input type="radio" name="2" value="D" th:title="*{get(2).getD()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    </tbody>
+                    <thead>
+                    <tr>
+                        <th>题目4</th>
+                        <th  th:text="*{get(3).getQuestion()}"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>选项A</td>
+                        <td><input type="radio" name="3" value="A" th:title="*{get(3).getA()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    <tr>
+                        <td>选项B</td>
+                        <td><input type="radio" name="3" value="B" th:title="*{get(3).getB()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    <tr>
+                        <td>选项C</td>
+                        <td><input type="radio" name="3" value="C" th:title="*{get(3).getC()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    <tr>
+                        <td>选项D</td>
+                        <td><input type="radio" name="3" value="D" th:title="*{get(3).getD()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    </tbody>
+                    <thead>
+                    <tr>
+                        <th>题目5</th>
+                        <th  th:text="*{get(4).getQuestion()}"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>选项A</td>
+                        <td><input type="radio" name="4" value="A" th:title="*{get(4).getA()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    <tr>
+                        <td>选项B</td>
+                        <td><input type="radio" name="4" value="B" th:title="*{get(4).getB()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    <tr>
+                        <td>选项C</td>
+                        <td><input type="radio" name="4" value="C" th:title="*{get(4).getC()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    <tr>
+                        <td>选项D</td>
+                        <td><input type="radio" name="4" value="D" th:title="*{get(4).getD()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    </tbody>
+                    <thead>
+                    <tr>
+                        <th>题目6</th>
+                        <th  th:text="*{get(5).getQuestion()}"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>选项A</td>
+                        <td><input type="radio" name="5" value="A" th:title="*{get(5).getA()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    <tr>
+                        <td>选项B</td>
+                        <td><input type="radio" name="5" value="B" th:title="*{get(5).getB()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    <tr>
+                        <td>选项C</td>
+                        <td><input type="radio" name="5" value="C" th:title="*{get(5).getC()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    <tr>
+                        <td>选项D</td>
+                        <td><input type="radio" name="5" value="D" th:title="*{get(5).getD()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    </tbody>
+                    <thead>
+                    <tr>
+                        <th>题目7</th>
+                        <th  th:text="*{get(6).getQuestion()}"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>选项A</td>
+                        <td><input type="radio" name="6" value="A" th:title="*{get(6).getA()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    <tr>
+                        <td>选项B</td>
+                        <td><input type="radio" name="6" value="B" th:title="*{get(6).getB()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    <tr>
+                        <td>选项C</td>
+                        <td><input type="radio" name="6" value="C" th:title="*{get(6).getC()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    <tr>
+                        <td>选项D</td>
+                        <td><input type="radio" name="6" value="D" th:title="*{get(6).getD()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    </tbody>
+                    <thead>
+                    <tr>
+                        <th>题目8</th>
+                        <th  th:text="*{get(7).getQuestion()}"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>选项A</td>
+                        <td><input type="radio" name="7" value="A" th:title="*{get(7).getA()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    <tr>
+                        <td>选项B</td>
+                        <td><input type="radio" name="7" value="B" th:title="*{get(7).getB()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    <tr>
+                        <td>选项C</td>
+                        <td><input type="radio" name="7" value="C" th:title="*{get(7).getC()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    <tr>
+                        <td>选项D</td>
+                        <td><input type="radio" name="7" value="D" th:title="*{get(7).getD()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    </tbody>
+                    <thead>
+                    <tr>
+                        <th>题目9</th>
+                        <th  th:text="*{get(8).getQuestion()}"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>选项A</td>
+                        <td><input type="radio" name="8" value="A" th:title="*{get(8).getA()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    <tr>
+                        <td>选项B</td>
+                        <td><input type="radio" name="8" value="B" th:title="*{get(8).getB()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    <tr>
+                        <td>选项C</td>
+                        <td><input type="radio" name="8" value="C" th:title="*{get(8).getC()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    <tr>
+                        <td>选项D</td>
+                        <td><input type="radio" name="8" value="D" th:title="*{get(8).getD()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    </tbody>
+                    <thead>
+                    <tr>
+                        <th>题目10</th>
+                        <th  th:text="*{get(9).getQuestion()}"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>选项A</td>
+                        <td><input type="radio" name="9" value="A" th:title="*{get(9).getA()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    <tr>
+                        <td>选项B</td>
+                        <td><input type="radio" name="9" value="B" th:title="*{get(9).getB()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    <tr>
+                        <td>选项C</td>
+                        <td><input type="radio" name="9" value="C" th:title="*{get(9).getC()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    <tr>
+                        <td>选项D</td>
+                        <td><input type="radio"  name="9" value="D" th:title="*{get(9).getD()}" title="主机健盘与显示器"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <blockquote class="layui-elem-quote news_search">
+
+                <div class="layui-inline">
+                    <div class="layui-form-mid layui-word-aux">请仔细检查！</div>
+                </div>
+                <div class="layui-inline">
+                    <button type="reset" class="layui-btn layui-btn-primary"  style="background-color:#5FB878">重置</button>
+                </div>
+                <div class="layui-inline" style="float: right">
+                    <!--<button type="button" class="layui-btn layui-btn-normal newsAdd_btn">提交</button>-->
+                    <a href="javascript:;" id="submit" class="layui-btn layui-btn-normal newsAdd_btn">提交</a>
+                </div>
+            </blockquote>
+            </form>
+        </div>
+    </div>
+
+</section>
+<script type="text/javascript" th:src="@{/easyui/jquery-1.8.0.min.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/easyui/themes/default/easyui.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/easyui/themes/icon.css}">
+<script type="text/javascript" th:src="@{/easyui/jquery.easyui.min.js}"></script>
+<script type="text/javascript" th:src="@{common/layui/layui.js}" src="common/layui/layui.js"></script>
+<script type="text/javascript" th:src="@{js/newslist.js}" src="js/newslist.js"></script>
+<script type="text/javascript">
+
+    //提交按钮
+    $(function () {
+        $("#submit").click(function () {
+            var list = new Array();
+            var flag = true;
+            for(var i = 0 ;i < 10;i++) {
+                // var v = i.toString();
+                var name = $('input[name=' + i.toString() + ']:checked').val();
+                // alert(name);
+                if(name != null) {
+                    list[i] = name;
+                }else {
+                    // alert(i + " = "+name);
+                    flag = false;
+                    break;
+                }
+            }
+
+            if(flag == true) {
+                var targetUrl = $("#submitform").attr("action");
+                var data = list;
+                var flag = "rand";
+
+                $.ajax({
+                    type:'post',
+                    url:targetUrl + "?list=" + list + "&flag=" + flag,
+                    cache: false,
+                    data:data,  //重点必须为一个变量如：data
+                    dataType:'text',
+                    success:function(data){
+                        // alert("提交成功");
+                        if(data == 1) {
+                            $.messager.alert("提示","提交成功","success");
+                            window.location.href="/showranderror2";
+                        }else {
+                            $.messager.alert("提示","提交失败","error");
+                        }
+                    },
+                    error:function(){
+                        $.messager.alert("提示","请求失败","error");
+                    }
+                })
+            }else {
+                $.messager.alert("提示","你还有题目未完成，请完成！","error");
+            }
+        });
+    });
+
+    // //重置按钮
+    // $(function () {
+    //     $("#reset").click(function () {
+    //         // alert("xxx")
+    //         // for(var i = 0;i < 10;i++) {
+    //         //     var name = $('input:radio[checked="checked"]').removeAttr('checked');
+    //             // alert(name)
+    //                 // $("input[type='radio']").removeAttr('checked');
+    //         // }
+    //     });
+    // });
+
+    //分页操做，该页面多余
+    layui.use(['jquery', 'layer', 'element', 'laypage'], function () {
+        window.jQuery = window.$ = layui.jquery;
+        window.layer = layui.layer;
+        var element = layui.element(),
+            laypage = layui.laypage;
+
+
+        laypage({
+            cont: 'page',
+            pages: 10 //总页数
+            ,
+            groups: 5 //连续显示分页数
+            ,
+            jump: function (obj, first) {
+                //得到了当前页，用于向服务端请求对应数据
+                var curr = obj.curr;
+                if (!first) {
+                    //layer.msg('第 '+ obj.curr +' 页');
+                }
+            }
+        });
+
+        laypage({
+            cont: 'page2',
+            pages: 10 //总页数
+            ,
+            groups: 5 //连续显示分页数
+            ,
+            jump: function (obj, first) {
+                //得到了当前页，用于向服务端请求对应数据
+                var curr = obj.curr;
+                if (!first) {
+                    //layer.msg('第 '+ obj.curr +' 页');
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

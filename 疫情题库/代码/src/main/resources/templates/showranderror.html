@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>乱序练习(答案页)</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" type="text/css" th:href="@{common/layui/css/layui.css}" href="common/layui/css/layui.css"
+          media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{common/bootstrap/css/bootstrap.css}"
+          href="common/bootstrap/css/bootstrap.css" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{common/global.css}" href="common/global.css" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{css/personal.css}" href="css/personal.css" media="all">
+</head>
+<body>
+<section class="layui-larry-box">
+    <div class="larry-personal">
+        <div class="layui-tab">
+            <blockquote class="layui-elem-quote news_search">
+
+                <div class="layui-inline">
+                    <div class="layui-form-mid layui-word-aux" th:text="'欢迎使用本套系统，当前是乱序刷题错题界面，共错' + ${session.showRandErrors.size()} + '题'"></div>
+                </div>
+
+                <div class="layui-inline" style="float: right;">
+                    <div class="layui-form-mid layui-word-aux">本页面刷新后所有操作无效，关闭或刷新页面所有数据重置</div>
+                </div>
+            </blockquote>
+
+            <!-- 操作日志 -->
+            <!--<form id="submitform" class="layui-form col-lg-12" th:action="@{/lib/trueORfalse}" method="post" name="list">-->
+            <div class="layui-form news_list" th:object="${session.randPage}">
+                <table class="layui-table" th:each="error,iterStat:${session.showRandErrors}">
+
+                    <thead>
+                        <tr>
+                            <th th:text="'错题'+ ${iterStat.count}">错题1</th>
+                            <th  th:text="${error.getQuestion()}"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>选项A</td>
+                            <td th:text="${error.getA()}"></td>
+                        </tr>
+                        <tr>
+                            <td>选项B</td>
+                            <td th:text="${error.getB()}"></td>
+                        </tr>
+                        <tr>
+                            <td>选项C</td>
+                            <td th:text="${error.getC()}"></td>
+                        </tr>
+                        <tr>
+                            <td>选项D</td>
+                            <td th:text="${error.getD()}"></td>
+                        </tr>
+                        <tr>
+                            <td>答案</td>
+                            <td th:text="${error.getAnswer()}"></td>
+                        </tr>
+                        <!--<form>-->
+                        <tr>
+                            <td colspan="2">
+                                <form th:action="@{/error/addRemarks}" method="post" th:name="${iterStat.index}">
+                                    <div style="width: 10%;float: left">
+                                        <input class="layui-btn layui-btn-primary"  style="background-color:#a4e9c1" type="submit" value="备注" onclick="alertmethod()">
+                                    </div>
+                                    <div>
+                                        <input type="hidden" name="lid" th:value="${error.getlId()}">
+                                        <input type="hidden" name="uid" th:value="${session.loginUser.getuId()}">
+                                    </div>
+                                    <div style="width: 90%;float: right">
+                                        <input type="text" name="remarks"  class="layui-input"  placeholder="如有错题笔记，请点在此备注">
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                        <!--</form>-->
+                    </tbody>
+
+                </table>
+            </div>
+
+            <blockquote class="layui-elem-quote news_search" style="height: 60px">
+
+                <div th:if="${session.showRandErrors.size()}/${session.randPage.size()} <= 0.4" class="layui-inline" >
+                    <!--<button type="button" class="layui-btn layui-btn-normal newsAdd_btn">提交</button>-->
+                    <a th:href="@{/lib/randLib}" class="layui-btn layui-btn-normal newsAdd_btn">下一页</a>
+                </div>
+                <div th:if="${session.showRandErrors.size()}/${session.randPage.size()} > 0.4" class="layui-inline" >
+                    <!--<button type="button" class="layui-btn layui-btn-normal newsAdd_btn">提交</button>-->
+                    <a th:href="@{/randpage}" class="layui-btn layui-btn-normal newsAdd_btn">重新练习</a>
+                </div>
+            </blockquote>
+            <!--</form>-->
+        </div>
+    </div>
+
+</section>
+<script type="text/javascript" th:src="@{/easyui/jquery-1.8.0.min.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/easyui/themes/default/easyui.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/easyui/themes/icon.css}">
+<script type="text/javascript" th:src="@{/easyui/jquery.easyui.min.js}"></script>
+<script type="text/javascript" th:src="@{common/layui/layui.js}" src="common/layui/layui.js"></script>
+<script type="text/javascript" th:src="@{js/newslist.js}" src="js/newslist.js"></script>
+<script type="text/javascript">
+
+    function alertmethod() {
+        alert("备注成功");
+    }
+/*
+    //提交按钮
+    $(function () {
+        $("#submit").click(function () {
+            var list = new Array();
+            var flag = true;
+            for(var i = 0 ;i < 10;i++) {
+                // var v = i.toString();
+                var name = $('input[name=' + i.toString() + ']:checked').val();
+                // alert(name);
+                if(name != null) {
+                    list[i] = name;
+                }else {
+                    // alert(i + " = "+name);
+                    flag = false;
+                    break;
+                }
+            }
+
+            if(flag == true) {
+                var targetUrl = $("#submitform").attr("action");
+                var data = list;
+                var flag = "rand";
+                $.ajax({
+                    type:'post',
+                    url:targetUrl + "?list=" + list + "&flag=" + flag,
+                    cache: false,
+                    data:data,  //重点必须为一个变量如：data
+                    dataType:'text',
+                    success:function(data){
+                        // alert("提交成功");
+                        $.messager.alert("提示","提交成功","success");
+                    },
+                    error:function(){
+                        $.messager.alert("提示","请求失败","error");
+                    }
+                })
+            }else {
+                $.messager.alert("提示","你还有题目未完成，请完成！","error");
+            }
+        });
+    });
+
+    // //重置按钮
+    // $(function () {
+    //     $("#reset").click(function () {
+    //         // alert("xxx")
+    //         // for(var i = 0;i < 10;i++) {
+    //         //     var name = $('input:radio[checked="checked"]').removeAttr('checked');
+    //             // alert(name)
+    //                 // $("input[type='radio']").removeAttr('checked');
+    //         // }
+    //     });
+    // });
+
+    //分页操做，该页面多余
+    layui.use(['jquery', 'layer', 'element', 'laypage'], function () {
+        window.jQuery = window.$ = layui.jquery;
+        window.layer = layui.layer;
+        var element = layui.element(),
+            laypage = layui.laypage;
+
+
+        laypage({
+            cont: 'page',
+            pages: 10 //总页数
+            ,
+            groups: 5 //连续显示分页数
+            ,
+            jump: function (obj, first) {
+                //得到了当前页，用于向服务端请求对应数据
+                var curr = obj.curr;
+                if (!first) {
+                    //layer.msg('第 '+ obj.curr +' 页');
+                }
+            }
+        });
+
+        laypage({
+            cont: 'page2',
+            pages: 10 //总页数
+            ,
+            groups: 5 //连续显示分页数
+            ,
+            jump: function (obj, first) {
+                //得到了当前页，用于向服务端请求对应数据
+                var curr = obj.curr;
+                if (!first) {
+                    //layer.msg('第 '+ obj.curr +' 页');
+                }
+            }
+        });
+    });*/
+</script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>乱序练习</title>
+	<meta name="renderer" content="webkit">	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">	
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">	
+	<meta name="apple-mobile-web-app-capable" content="yes">	
+	<meta name="format-detection" content="telephone=no">	
+	<link rel="stylesheet" type="text/css" th:href="@{common/layui/css/layui.css}" href="common/layui/css/layui.css" media="all">
+	<link rel="stylesheet" type="text/css" th:href="@{common/bootstrap/css/bootstrap.css}" href="common/bootstrap/css/bootstrap.css" media="all">
+	<link rel="stylesheet" type="text/css" th:href="@{common/global.css}" href="common/global.css" media="all">
+	<link rel="stylesheet" type="text/css" th:href="@{css/personal.css}" href="css/personal.css" media="all">
+</head>
+<body>
+<section class="layui-larry-box">
+	<div class="larry-personal">
+	    <div class="layui-tab">
+            <blockquote class="layui-elem-quote news_search">
+		<div class="layui-inline">
+			<a class="layui-btn layui-btn-normal newsAdd_btn">提交</a>
+		</div>
+		<div class="layui-inline">
+			<a class="layui-btn recommend" style="background-color:#5FB878">重置</a>
+		</div>
+
+		<div class="layui-inline" style="float: right;">
+			<div class="layui-form-mid layui-word-aux">本页面刷新后所有操作无效，关闭或刷新页面所有数据重置</div>
+		</div>
+	</blockquote>
+            
+		         <!-- 操作日志 -->
+                <div class="layui-form news_list">
+                    <table class="layui-table">
+
+					<thead>
+						<tr>
+							<th style="text-align:left;">题目</th>
+							<th>A</th>
+							<th>B</th>
+							<th>C</th>
+							<th>D</th>
+						</tr>
+					</thead>
+					<tbody class="news_content" th:object="${session.randPage}">
+						<tr>
+							<td style="text-align:left;" th:text="*{get(0).getQuestion()}"></td>
+							<td><input type="radio" name="0" value="A" th:title="*{get(0).getA()}" title="主机健盘与显示器"></td>
+							<td><input type="radio" name="0" value="B" th:title="*{get(0).getB()}" title="主机健盘与显示器"></td>
+							<td><input type="radio" name="0" value="C" th:title="*{get(0).getC()}" title="主机健盘与显示器"></td>
+							<td><input type="radio" name="0" value="D" th:title="*{get(0).getD()}" title="主机健盘与显示器"></td>
+						</tr>
+						<tr>
+							<td style="text-align:left;" th:text="*{get(1).getQuestion()}"></td>
+							<td><input type="radio" name="1" value="A" th:title="*{get(1).getA()}" title="主机健盘与显示器"></td>
+							<td><input type="radio" name="1" value="B" th:title="*{get(1).getB()}" title="主机健盘与显示器"></td>
+							<td><input type="radio" name="1" value="C" th:title="*{get(1).getC()}" title="主机健盘与显示器"></td>
+							<td><input type="radio" name="1" value="D" th:title="*{get(1).getD()}" title="主机健盘与显示器"></td>
+						</tr>
+						<tr>
+							<td style="text-align:left;" th:text="*{get(2).getQuestion()}"></td>
+							<td><input type="radio" name="2" value="A" th:title="*{get(2).getA()}" title="主机健盘与显示器"></td>
+							<td><input type="radio" name="2" value="B" th:title="*{get(2).getB()}" title="主机健盘与显示器"></td>
+							<td><input type="radio" name="2" value="C" th:title="*{get(2).getC()}" title="主机健盘与显示器"></td>
+							<td><input type="radio" name="2" value="D" th:title="*{get(2).getD()}" title="主机健盘与显示器"></td>
+						</tr>
+						<tr>
+							<td style="text-align:left;" th:text="*{get(3).getQuestion()}"></td>
+							<td><input type="radio" name="3" value="A" th:title="*{get(3).getA()}" title="主机健盘与显示器"></td>
+							<td><input type="radio" name="3" value="B" th:title="*{get(3).getB()}" title="主机健盘与显示器"></td>
+							<td><input type="radio" name="3" value="C" th:title="*{get(3).getC()}" title="主机健盘与显示器"></td>
+							<td><input type="radio" name="3" value="D" th:title="*{get(3).getD()}" title="主机健盘与显示器"></td>
+						</tr>
+						<tr>
+							<td style="text-align:left;" th:text="*{get(4).getQuestion()}"></td>
+							<td><input type="radio" name="4" value="A" th:title="*{get(4).getA()}" title="主机健盘与显示器"></td>
+							<td><input type="radio" name="4" value="B" th:title="*{get(4).getB()}" title="主机健盘与显示器"></td>
+							<td><input type="radio" name="4" value="C" th:title="*{get(4).getC()}" title="主机健盘与显示器"></td>
+							<td><input type="radio" name="4" value="D" th:title="*{get(4).getD()}" title="主机健盘与显示器"></td>
+						</tr>
+						<tr>
+							<td style="text-align:left;" th:text="*{get(5).getQuestion()}"></td>
+							<td><input type="radio" name="5" value="A" th:title="*{get(5).getA()}" title="主机健盘与显示器"></td>
+							<td><input type="radio" name="5" value="B" th:title="*{get(5).getB()}" title="主机健盘与显示器"></td>
+							<td><input type="radio" name="5" value="C" th:title="*{get(5).getC()}" title="主机健盘与显示器"></td>
+							<td><input type="radio" name="5" value="D" th:title="*{get(5).getD()}" title="主机健盘与显示器"></td>
+						</tr>
+						<tr>
+							<td style="text-align:left;" th:text="*{get(6).getQuestion()}"></td>
+							<td><input type="radio" name="6" value="A" th:title="*{get(6).getA()}" title="主机健盘与显示器"></td>
+							<td><input type="radio" name="6" value="B" th:title="*{get(6).getB()}" title="主机健盘与显示器"></td>
+							<td><input type="radio" name="6" value="C" th:title="*{get(6).getC()}" title="主机健盘与显示器"></td>
+							<td><input type="radio" name="6" value="D" th:title="*{get(6).getD()}" title="主机健盘与显示器"></td>
+						</tr>
+						<tr>
+							<td style="text-align:left;" th:text="*{get(7).getQuestion()}"></td>
+							<td><input type="radio" name="7" value="A" th:title="*{get(7).getA()}" title="主机健盘与显示器"></td>
+							<td><input type="radio" name="7" value="B" th:title="*{get(7).getB()}" title="主机健盘与显示器"></td>
+							<td><input type="radio" name="7" value="C" th:title="*{get(7).getC()}" title="主机健盘与显示器"></td>
+							<td><input type="radio" name="7" value="D" th:title="*{get(7).getD()}" title="主机健盘与显示器"></td>
+						</tr>
+						<tr>
+							<td style="text-align:left;" th:text="*{get(8).getQuestion()}"></td>
+							<td><input type="radio" name="8" value="A" th:title="*{get(8).getA()}" title="主机健盘与显示器"></td>
+							<td><input type="radio" name="8" value="B" th:title="*{get(8).getB()}" title="主机健盘与显示器"></td>
+							<td><input type="radio" name="8" value="C" th:title="*{get(8).getC()}" title="主机健盘与显示器"></td>
+							<td><input type="radio" name="8" value="D" th:title="*{get(8).getD()}" title="主机健盘与显示器"></td>
+						</tr>
+						<tr>
+							<td style="text-align:left;" th:text="*{get(9).getQuestion()}"></td>
+							<td><input type="radio" name="9" value="A" th:title="*{get(9).getA()}" title="主机健盘与显示器"></td>
+							<td><input type="radio" name="9" value="B" th:title="*{get(9).getB()}" title="主机健盘与显示器"></td>
+							<td><input type="radio" name="9" value="C" th:title="*{get(9).getC()}" title="主机健盘与显示器"></td>
+							<td><input type="radio" name="9" value="D" th:title="*{get(9).getD()}" title="主机健盘与显示器"></td>
+						</tr>
+
+					</tbody>
+					</table>
+			    </div>
+
+		    </div>
+		</div>
+	
+</section>
+<script type="text/javascript" th:src="@{common/layui/layui.js}" src="common/layui/layui.js"></script>
+<script type="text/javascript" th:src="@{js/newslist.js}" src="js/newslist.js"></script>
+<script type="text/javascript">
+	layui.use(['jquery','layer','element','laypage'],function(){
+	      window.jQuery = window.$ = layui.jquery;
+	      window.layer = layui.layer;
+          var element = layui.element(),
+              laypage = layui.laypage;
+
+            
+          laypage({
+					cont: 'page',
+					pages: 10 //总页数
+						,
+					groups: 5 //连续显示分页数
+						,
+					jump: function(obj, first) {
+						//得到了当前页，用于向服务端请求对应数据
+						var curr = obj.curr;
+						if(!first) {
+							//layer.msg('第 '+ obj.curr +' 页');
+						}
+					}
+				});
+
+          laypage({
+					cont: 'page2',
+					pages: 10 //总页数
+						,
+					groups: 5 //连续显示分页数
+						,
+					jump: function(obj, first) {
+						//得到了当前页，用于向服务端请求对应数据
+						var curr = obj.curr;
+						if(!first) {
+							//layer.msg('第 '+ obj.curr +' 页');
+						}
+					}
+				});
+    });
+</script>
+</body>
+</html>

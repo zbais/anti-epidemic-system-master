@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>用户登陆</title>
+	<meta name="renderer" content="webkit">	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">	
+	<meta name="apple-mobile-web-app-capable" content="yes">	
+	<meta name="format-detection" content="telephone=no">
+	<!-- load css -->
+	<link rel="stylesheet" type="text/css"th:href="@{common/layui/css/layui.css}" href="common/layui/css/layui.css" media="all">
+	<link rel="stylesheet" type="text/css" th:href="@{css/login.css}" href="css/login.css" media="all">
+
+</head>
+<body>
+<div class="layui-canvs"></div>
+<div class="layui-layout layui-layout-login">
+	<h1>
+		 <strong>井冈山大学疫情刷题系统</strong>
+		 <em>
+             JGS University Epidemic Questions System
+		 </em>
+	</h1>
+    <form th:action="@{/user/loginMethod}" th:id="loginform">
+        <div class="layui-user-icon larry-login">
+            <input type="text" name="username" placeholder="用户名" class="login_txtbx"/>
+        </div>
+        <div class="layui-pwd-icon larry-login">
+            <input type="password"name="password" placeholder="密码" class="login_txtbx"/>
+        </div>
+        <div class="layui-val-icon larry-login">
+            <div class="layui-code-box">
+                <div style="float: left">
+                    <input type="text" id="code" name="code" placeholder="验证码" maxlength="4" class="login_txtbx">
+                </div>
+                <div style="float: right;" >
+                    <img th:src="@{captcha/captchaImage(type='math')}"   width="75%" src="images/verifyimg.png" disabled="block" style="float: right;"
+                         alt="" th:name="validateCode" th:class="imgcode" class="verifyImg"
+                         id="verifyImg" onClick="javascript:this.src='captcha/captchaImage?type=math&s='+'xxx'+Math.random();">
+                </div>
+            </div>
+
+            <!--<div class="col-xs-6">-->
+            <!--<input type="text" name="validateCode" class="form-control code" placeholder="验证码" maxlength="5" autocomplete="off">-->
+            <!--</div>-->
+            <!--<div class="col-xs-6">-->
+            <!--<div class="col-xs-6">-->
+            <!--<a href="javascript:void(0);" title="点击更换验证码">-->
+            <!--<img th:src="@{captcha/captchaImage(type='math')}" class="imgcode" width="85%"/>-->
+            <!--</a>-->
+            <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="layui-submit larry-login">
+            <input type="button" value="立即登陆" class="submit_btn"/>
+        </div>
+    </form>
+
+
+    <div class="layui-login-text">
+		<p><a th:href="@{/register}" href="#" style="color: red;">没有账号，点此注册</a>    <a th:href="@{/findmyuser}" href="#" style="color: #85C998;">忘记密码，点此找回</a></p>
+
+        <!--<p></p>-->
+	</div>
+</div>
+<script type="text/javascript" th:src="@{/easyui/jquery-1.8.0.min.js}"></script>
+<script type="text/javascript" th:src="@{common/layui/lay/dest/layui.all.js}" src="common/layui/lay/dest/layui.all.js"></script>
+<script type="text/javascript" th:src="@{js/login.js}" src="js/login.js"></script>
+<script type="text/javascript" th:src="@{jsplug/jparticle.jquery.js}" src="jsplug/jparticle.jquery.js"></script>
+
+<link rel="stylesheet" type="text/css" th:href="@{/easyui/themes/default/easyui.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/easyui/themes/icon.css}">
+<script type="text/javascript" th:src="@{/easyui/jquery.easyui.min.js}"></script>
+
+<script type="text/javascript">
+$(function(){
+	$(".layui-canvs").jParticle({
+		background: "#141414",
+		color: "#E6E6E6"
+	});
+    //登录链接测试，使用时可删除
+    $(".submit_btn").click(function(){
+
+        var username = $(" input[ name='username' ] ").val().trim();
+        var password = $(" input[ name='password' ] ").val().trim();
+        var code = $(" input[ name='code' ] ").val().trim();
+
+        if(username.length == 0 || password.length == 0 || code.length == 0) {
+            $.messager.alert("提示","登陆信息缺失","error");
+        }else {
+            // $("#loginform").submit();
+            var targetUrl = $("#loginform").attr("action");
+            var data = $("#loginform").serialize();
+
+            $.ajax({
+                type:'post',
+                url:targetUrl,
+                cache: false,
+                data:data,  //重点必须为一个变量如：data
+                dataType:'json',
+                success:function(data){
+                    // alert("zzz");
+                    if(data == 2) {
+                        $.messager.alert("提示","验证码不正确","error");
+                    }
+                    if(data == 0) {
+                        // alert("用户名或者密码不正确");
+                        $.messager.alert("提示","用户名或者密码不正确","error");
+                    }
+
+                    if(data == 1) {
+                        window.location.href="/index";
+                    }
+
+                },
+                error:function(){
+                    $.messager.alert("提示","请求失败","error");
+                }
+            })
+        }
+
+    });
+});
+</script>
+</body>
+</html>

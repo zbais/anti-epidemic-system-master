@@ -1,0 +1,139 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {}
+		}, {
+			"path": "pages/tabbar/member",
+			"style": {
+				"enablePullDownRefresh": true,
+				"onReachBottomDistance": 50
+			}
+		},
+		{
+			"path": "pages/tabbar/add",
+			"style": {}
+		},
+		{
+			"path": "pages/tabbar/search",
+			"style": {
+				"h5": {
+					"titleNView": {
+						"buttons": [{
+							"type": "none",
+							"text": "导出",
+							"float": "right",
+							"fontSize": "15px",
+							"fontWeight": "bold"
+						}]
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/tabbar/my",
+			"style": {}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {}
+		},
+		{
+			"path": "pages/add-member/add-member",
+			"style": {}
+		},
+		{
+			"path": "pages/member-detail/member-detail",
+			"style": {}
+		},
+		{
+			"path": "pages/chart/chart",
+			"style": {}
+		}, {
+			"path": "pages/change-pwd/change-pwd",
+			"style": {
+				"navigationBarTitleText": "设置密码"
+			}
+		}
+	    ,{
+            "path" : "pages/new-user/new-user",
+            "style" : {}
+        },
+				{
+				      "path" : "pages/news/index",
+				      "style" : {}
+				  },
+					{
+					  "path": "pages/detail/detail",
+					  "style": {
+					    "app-plus": {
+					      "titleNView": {
+					        "type": "transparent"
+					      }
+					    }
+					  }
+					}
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "智慧校园疫情防控系统",
+		"navigationBarBackgroundColor": "#1688fb",
+		"backgroundColor": "#1688fb"
+	},
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#007AFF",
+		"borderStyle": "black",
+		"backgroundColor": "#CCFFFF",
+		"list": [{
+				"pagePath": "pages/tabbar/member",
+				"iconPath": "static/tab-icon/list.png",
+				"selectedIconPath": "static/tab-icon/list-on.png",
+				"text": "列表"
+			},
+			{
+				"pagePath": "pages/chart/chart",
+				"iconPath": "static/tab-icon/chart.png",
+				"selectedIconPath": "static/tab-icon/chart-on.png",
+				"text": "图表"
+			},
+	
+			{
+				"pagePath": "pages/tabbar/search",
+				"iconPath": "static/tab-icon/search.png",
+				"selectedIconPath": "static/tab-icon/search-on.png",
+				"text": "搜索"
+			},		
+			{
+				"pagePath": "pages/news/index",
+				"iconPath": "static/tab-icon/news.png",
+				"selectedIconPath": "static/tab-icon/news-on.png",
+				"text": "新闻"
+			} ,
+			{
+				"pagePath": "pages/tabbar/add",
+				"iconPath": "static/tab-icon/yiqing.png",
+				"selectedIconPath": "static/tab-icon/yiqing-on.png" ,
+				"text": "添加"
+			} ,
+			{
+				"pagePath": "pages/tabbar/my",
+				"iconPath": "static/tab-icon/me.png",
+				"selectedIconPath": "static/tab-icon/me-on.png",
+				"text": "我的"
+			}
+		]
+	},
+	"easycom": {
+		"z-table": "@/components/z-table/z-table"
+	},
+	"rightWindow": {
+	  "path": "responsive/right-window.vue",
+	  "style": {
+	    "width": "calc(100vw - 450px)"
+	  },
+	  "matchMedia": {
+	    "minWidth": 768
+	  }
+	}
+}

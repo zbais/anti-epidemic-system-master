@@ -1,0 +1,17 @@
+{
+  "name": "discipline-report",
+  "version": "0.0.1",
+  "description": "违纪举报系统云函数",
+  "main": "index.js",
+  "scripts": {},
+  "author": "wangyaqi@dcloud.io",
+  "license": "MIT",
+  "devDependencies": {
+    "rollup": "^1.26.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0"
+  },
+  "dependencies": {
+    "jwt-simple": "^0.5.6"
+  }
+}

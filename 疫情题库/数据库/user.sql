@@ -1,0 +1,1 @@
+INSERT INTO `user`(`u_id`, `username`, `password`, `phone`, `email`, `gender`, `lastindex`, `allquestioncount`, `errorquestioncount`, `lastlogintime`) VALUES (1, 'lzh', 'lzh', '19970336798', 'lzh_create', 1, 0, 20, 11, '2021-02-21 13:31:26');

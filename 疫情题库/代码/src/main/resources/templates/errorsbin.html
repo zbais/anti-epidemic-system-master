@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>错题回收站</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" type="text/css" th:href="@{common/layui/css/layui.css}" href="common/layui/css/layui.css"
+          media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{common/bootstrap/css/bootstrap.css}"
+          href="common/bootstrap/css/bootstrap.css" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{common/global.css}" href="common/global.css" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{css/personal.css}" href="css/personal.css" media="all">
+</head>
+<body>
+<section class="layui-larry-box">
+    <div class="larry-personal">
+        <div class="layui-tab">
+            <blockquote class="layui-elem-quote news_search">
+
+                <div class="layui-inline">
+                    <div class="layui-form-mid layui-word-aux" th:text="'欢迎使用本套系统，当前是错题回收站界面，共有' + ${session.pb.getTotalCount()} + '题'"></div>
+                </div>
+
+                <div class="layui-inline" style="float: right;">
+                    <div class="layui-form-mid layui-word-aux">本页面刷新后所有操作无效，关闭或刷新页面所有数据重置</div>
+                </div>
+            </blockquote>
+
+            <div class="layui-form news_list">
+                <table class="layui-table" th:each="error,iterStat:${session.pb.list}">
+
+                    <thead>
+                        <tr>
+                            <th th:text="'题目编号'+${error.getlId()}"></th>
+                            <th  th:text="${error.getQuestion()}" colspan="6"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>选项A</td>
+                            <td th:text="${error.getA()}" colspan="6"></td>
+                        </tr>
+                        <tr>
+                            <td>选项B</td>
+                            <td th:text="${error.getB()}" colspan="6"></td>
+                        </tr>
+                        <tr>
+                            <td>选项C</td>
+                            <td th:text="${error.getC()}" colspan="6"></td>
+                        </tr>
+                        <tr>
+                            <td>选项D</td>
+                            <td th:text="${error.getD()}" colspan="6"></td>
+                        </tr>
+                        <tr>
+                            <td>错答</td>
+                            <td th:text="${error.getLastErrorAnswer()}"></td>
+                            <td>标答</td>
+                            <td th:text="${error.getAnswer()}"></td>
+                            <td>错次</td>
+                            <td th:text="${error.getErrorcount()}"></td>
+                        </tr>
+                        <!--<form>-->
+                        <tr>
+                            <td colspan="6">
+                                <div>
+                                    <form th:action="@{/error/deleteError}" method="post" th:name="${iterStat.index}">
+                                        <div style="width: 10%;float: left">
+                                            <input class="layui-btn layui-btn-primary"  style="background-color:#a4e9c1" type="submit" value="错题恢复" onclick="alertmethod()">
+                                        </div>
+                                        <div>
+                                            <input type="hidden" name="lid" th:value="${error.getlId()}">
+                                            <input type="hidden" name="currentPage" th:value="${session.pb.currentPage}">
+                                            <input type="hidden" name="rows" th:value="${session.pb.getRows()}">
+                                            <input type="hidden" name="flag" th:value="0">
+                                            <input type="hidden" name="uid" th:value="${session.loginUser.getuId()}">
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div style="float:right;">
+                                    <form th:action="@{/error/deleteError}" method="post" th:name="${iterStat.index}">
+                                        <div style="width: 10%;float: left">
+                                            <input class="layui-btn layui-btn-primary"  style="background-color:#a4e9c1" type="submit" value="永久删除" onclick="alertmethod()">
+                                        </div>
+                                        <div>
+                                            <input type="hidden" name="lid" th:value="${error.getlId()}">
+                                            <input type="hidden" name="currentPage" th:value="${session.pb.currentPage}">
+                                            <input type="hidden" name="rows" th:value="${session.pb.getRows()}">
+                                            <input type="hidden" name="flag" th:value="2">
+                                            <input type="hidden" name="uid" th:value="${session.loginUser.getuId()}">
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </td>
+                        </tr>
+                        <!--</form>-->
+                    </tbody>
+                </table>
+
+                <div>
+                    <div>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                <li th:class="${session.pb.currentPage==1}?'disabled':''">
+                                    <a th:href="@{/error/errorsPage(currentPage=${session.pb.currentPage}-1,flag=0)}" >
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+
+                                <li th:each="page : ${#numbers.sequence(1,session.pb.totalPage)}" th:class="${session.pb.currentPage==page}?'active':''">
+                                    <a th:href="@{/error/errorsPage(currentPage=${page},flag=1)}" th:text="${page}"></a>
+                                </li>
+
+                                    <li th:if="${session.pb.currentPage}==${session.pb.totalPage}" class="disabled">
+                                        <a th:href="@{/error/errorsPage(currentPage=${session.pb.currentPage},flag=0)}"  aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+
+
+                                    <li th:if="${session.pb.currentPage}!=${session.pb.totalPage}">
+                                        <a th:href="@{/error/errorsPage(currentPage=${session.pb.currentPage}+1,flag=0)}"  aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+
+                                <span style="font-size: 25px;margin: 5px"
+                                    th:text="'共'+ ${session.pb.totalCount} + '条记录，共' + ${session.pb.totalPage} + '页'">
+                                </span>
+                            </ul>
+                        </nav>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript" th:src="@{/easyui/jquery-1.8.0.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/easyui/themes/default/easyui.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/easyui/themes/icon.css}">
+<script type="text/javascript" th:src="@{/easyui/jquery.easyui.min.js}"></script>
+<script type="text/javascript" th:src="@{common/layui/layui.js}" src="../static/common/layui/layui.js"></script>
+<script type="text/javascript" th:src="@{js/newslist.js}" src="../static/js/newslist.js"></script>
+<script type="text/javascript">
+
+    function alertmethod() {
+        alert("修改成功");
+    }
+
+    layui.use(['jquery', 'layer', 'element', 'laypage'], function () {
+        window.jQuery = window.$ = layui.jquery;
+        window.layer = layui.layer;
+        var element = layui.element(),
+            laypage = layui.laypage;
+
+
+        laypage({
+            cont: 'page',
+            pages: 10 //总页数
+            ,
+            groups: 5 //连续显示分页数
+            ,
+            jump: function (obj, first) {
+                //得到了当前页，用于向服务端请求对应数据
+                var curr = obj.curr;
+                if (!first) {
+                    //layer.msg('第 '+ obj.curr +' 页');
+                }
+            }
+        });
+
+        laypage({
+            cont: 'page2',
+            pages: 10 //总页数
+            ,
+            groups: 5 //连续显示分页数
+            ,
+            jump: function (obj, first) {
+                //得到了当前页，用于向服务端请求对应数据
+                var curr = obj.curr;
+                if (!first) {
+                    //layer.msg('第 '+ obj.curr +' 页');
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>
